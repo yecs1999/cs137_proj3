@@ -14,9 +14,17 @@
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>IndexServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CarHistoryServlet</servlet-name>
+        <servlet-class>CarHistoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/IndexServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CarHistoryServlet</servlet-name>
+        <url-pattern>/CarHistoryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

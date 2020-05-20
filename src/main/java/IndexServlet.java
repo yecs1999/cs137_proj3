@@ -16,6 +16,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Chris
@@ -34,7 +36,7 @@ public class IndexServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
-        
+        HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
@@ -47,7 +49,11 @@ public class IndexServlet extends HttpServlet {
             while (cat_len.next()){
                 categories.add(cat_len.getString("category"));
             }
-            String htmlText = "";
+            String htmlText = "<div class='categories'>"
+                    + "<table id='car_table'>"
+                    + "<thead><tr><th>Hatch</th><th>Minivan</th><th>Sedan</th><th>Sports</th><th>SUV</th></tr></thead>"
+                    + "<tbody>";
+            String endHtml = "</tbody></table>";
             for (int i =0; i < 2; i++){
                 htmlText += "<tr>";
                 for (int j = 0; j < categories.size();j++){
@@ -65,7 +71,7 @@ public class IndexServlet extends HttpServlet {
                         String model = crow_rs.getString("model");
                         Integer year = crow_rs.getInt("year");
                         String price = crow_rs.getString("price");
-                        htmlText += "<td><a href=car_info.php?pid=" + pid.toString() + ">";
+                        htmlText += "<td><a href=car_info.php?pid=" + pid.toString() + " onclick='addCarToHistory(" + pid.toString() + ");'>";
                         htmlText += "<img src=" + main_img + " width=250 height=250></a>";
                         htmlText += "<b>" + make + " " + model + " " + year + "<br>$ ";
                         htmlText += price + "</b></td>";
@@ -75,9 +81,14 @@ public class IndexServlet extends HttpServlet {
                 }
                 htmlText += "</tr>";
             }
+            htmlText += endHtml;
             stmt.close();
             cat_len.close();
             out.write(htmlText);
+            RequestDispatcher dis = request.getRequestDispatcher("CarHistoryServlet");          
+            dis.include(request, response);     
+
+            
             response.setStatus(200);
             dbcon.close();
             
