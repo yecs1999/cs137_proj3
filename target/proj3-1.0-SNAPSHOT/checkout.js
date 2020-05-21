@@ -5,44 +5,40 @@ var method;
 var address;
 var tax = 0;
 
+function setupCheckout() {
+    //getFinalPrice();
+    //document.getElementById("zip").addEventListener("blur", getFinalPrice);
+    //getFinalPlace()
+    //document.getElementById("zip").addEventListener("blur", getFinalPlace);
+    getCart();
+}
 
-/*const getProduct = ()=>
-{
-    let query = window.location.search.substring(1);
-    let query_list = query.split("&");
-    var dict = new Object();
-    for (var i = 0; i < query_list.length; ++i)
-    {
-        let kv = query_list[i].split("=");
-        dict[kv[0]] = decodeURIComponent(kv[1]);
+function getCart() {
+    if (window.XMLHttpRequest)
+    {  // IE7+, Firefox, Chrome, Opera, Safari
+        var xhr = new XMLHttpRequest();
     }
-    return dict;
+    else
+    {  // IE5, IE6
+        var xhr = new ActiveXObject ("Microsoft.XMLHTTP");
+    }
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var result = xhr.responseText;
+            document.getElementById("cart").innerHTML = result;
+        }
+    }
+    xhr.open("POST", "CheckoutServlet", true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    xhr.send(null);
 }
 
-function productToString() {
-    var str = product["make"] + " ";
-    str += product["model"] + " ";
-    str += product["trim"];
-    return str;
-}
-
-function setupCheckout() {
-    product = getProduct();
-    document.getElementById("product").innerText = "Order for " + productToString();
-}*/
-function setupCheckout() {
-    getFinalPrice();
-    document.getElementById("zip").addEventListener("blur", getFinalPrice);
-    getFinalPlace()
-    document.getElementById("zip").addEventListener("blur", getFinalPlace);
-}
-
-function productToString() {
+/*function productToString() {
     var str = make + " ";
     str += model + " ";
     str += trim;
     return str;
-}
+}*/
 
 function isDigit(event, fieldName) {
     var key = event.keyCode;
@@ -50,7 +46,6 @@ function isDigit(event, fieldName) {
     if(key > 47 && key < 58) {
         return true;
     }
-    //alert("Only digits are allowed in the " + fieldName + " field.");
     return false;
 }
 
@@ -71,7 +66,6 @@ function conformIntlCode(value) {
 
 function setCursorPosition(field, position) {
     if(field.setSelectionRange) {
-        //field.focus();
         field.setSelectionRange(position, position);
     }
 }
@@ -155,14 +149,13 @@ function emailCheck(email) {
 function getFinalPrice() {
     fillAddress();
     if(address[4].value === "") {
-        document.getElementById("totalCost").innerText = priceFormat.format(price);
+        document.getElementById("totalCost").innerText = priceFormat.format(1.0);
     } else {
         getTax(address[4].value);
     }
 }
 
 function submitCheckout() {
-    //product = document.getElementById("product").innerText;
     var checkoutForm = document.getElementById("checkoutForm");
     var firstname = checkoutForm.firstname.value;
     var lastname = checkoutForm.lastname.value;
@@ -214,9 +207,9 @@ function getTax(zip)
     {
         var result = xhr.responseText;
         tax = parseFloat(result);
-        document.getElementById("totalCost").innerText = priceFormat.format(price + price * tax);
+        document.getElementById("totalCost").innerText = priceFormat.format(1.0 + 1.0 * tax);
     }
-  }
+  };
   // Call the response software component
   xhr.open ("GET", "getTaxRate.php?zip=" + zip);
   xhr.send (null);

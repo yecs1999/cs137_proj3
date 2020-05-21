@@ -18,6 +18,10 @@
         <servlet-name>CarHistoryServlet</servlet-name>
         <servlet-class>CarHistoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>CheckoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/IndexServlet</url-pattern>
@@ -25,6 +29,10 @@
     <servlet-mapping>
         <servlet-name>CarHistoryServlet</servlet-name>
         <url-pattern>/CarHistoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/CheckoutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
