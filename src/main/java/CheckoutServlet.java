@@ -11,9 +11,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,9 +56,10 @@ public class CheckoutServlet extends HttpServlet {
                 innerHtml += "<h2>No items are in your cart</h2>";
             }
             else {
-                innerHtml += "<h2>Checkout for Order of:</h2>";
+                innerHtml += "<h2 onload='getTotalPrice()'>Checkout for Order of:</h2>";
             }
             
+            double totalPrice = 0.0;
             for (int i = 0; i < cart.size(); i++) {
                 String pid = cart.get(i);
                 String query = "Select * from cardata where pid = ?";
@@ -68,12 +71,19 @@ public class CheckoutServlet extends HttpServlet {
                     String make = rs.getString("make");
                     String model = rs.getString("model");
                     Integer year = rs.getInt("year");
-                    innerHtml += "<b>PID " + act_pid.toString() + ":</b> <a href=car_info.php?pid=" + act_pid.toString()
+                    String price = rs.getString("price");
+                    totalPrice += Double.parseDouble(price);
+                    innerHtml += "<b>PID " + act_pid.toString() + ": </b> <a href=car_info.php?pid=" + act_pid.toString()
                             + " onclick='addCarToHistory(" + act_pid.toString() + ");'>" + make + " " + model + " " + year.toString() + "</a><br/>";
                 }
                 stmt.close();
                 rs.close();
             }
+            
+            Locale locale = new Locale("en", "US");
+            NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
+            innerHtml += "<b>TOTAL PRICE: </b>" + formatter.format(totalPrice) + "<br/>";
+            
             innerHtml += "<br/>";
             out.write(innerHtml);
             response.setStatus(200);
