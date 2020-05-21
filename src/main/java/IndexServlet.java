@@ -71,7 +71,7 @@ public class IndexServlet extends HttpServlet {
                         String model = crow_rs.getString("model");
                         Integer year = crow_rs.getInt("year");
                         String price = crow_rs.getString("price");
-                        htmlText += "<td><a href=car_info.php?pid=" + pid.toString() + " onclick='addCarToHistory(" + pid.toString() + ");'>";
+                        htmlText += "<td><a href=car_info.html?pid=" + pid.toString() + " onclick='addCarToHistory(" + pid.toString() + ");'>";
                         htmlText += "<img src=" + main_img + " width=250 height=250></a>";
                         htmlText += "<b>" + make + " " + model + " " + year + "<br>$ ";
                         htmlText += price + "</b></td>";

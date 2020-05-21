@@ -77,7 +77,7 @@ public class CarHistoryServlet extends HttpServlet {
                     String make = rs.getString("make");
                     String model = rs.getString("model");
                     Integer year = rs.getInt("year");
-                    innerHtml += "<b>PID " + act_pid.toString() + ":</b> <a href=car_info.php?pid=" + act_pid.toString()
+                    innerHtml += "<b>PID " + act_pid.toString() + ":</b> <a href=car_info.html"
                             + " onclick='addCarToHistory(" + act_pid.toString() + ");'>" + make + " " + model + " " + year.toString() + "</a><br>";
                 }
                 
