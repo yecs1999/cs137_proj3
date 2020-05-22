@@ -136,7 +136,15 @@ public class ProductDetailsServlet extends HttpServlet {
             "<div class=\"buttonDiv\">" +
                         
                 "<button type=\"button\" id=\"orderButton\" onclick= 'saveCar()'>"+
-                    "Save to Cart" +
+                    "Add to Cart" +
+                "</button>"+
+                "<br/>"+
+                "<button type=\"button\" id=\"orderButton\" onclick= 'location.href=\"index.html\";'>"+
+                    "Return to Main Page" +
+                "</button>"+
+                "<br/>"+
+                "<button type=\"button\" id=\"orderButton\" onclick= 'location.href=\"checkout.html\";'>"+
+                    "Checkout" +
                 "</button>"+
             "</div>";
             stmt.close();

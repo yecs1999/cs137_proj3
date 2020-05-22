@@ -71,15 +71,14 @@
                 <input type="text" name="cvv" id="cvv" value="" size=2 onkeypress="return isDigit(event, 'Payment Info')">
                 <br/><br/>
                 <!--<strong>TOTAL COST:</strong> <bdi id="totalCost">NULL</bdi>-->
-                <br/><br/>
-                <button onclick="document.getElementById('carname').value = productToString()">PURCHASE</button>
+                <button class="buttonClass" onclick="document.getElementById('carname').value = productToString()">PURCHASE</button>
             </form>
             </div>
         </div>
-        <!--
-        <div style="text-align:center">
-        <form action="index.php">
-            <input type="submit" value="Go back to index" />
+        <br/>
+        <div style="text-align: center">
+        <form action="index.html">
+            <input class="buttonClass" type="submit" value="Return to Main Page" />
         </form>
         </div>
         <!--

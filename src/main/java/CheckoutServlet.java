@@ -52,7 +52,7 @@ public class CheckoutServlet extends HttpServlet {
             //ArrayList<String> cart = request.getParameterValues("pid");
             ArrayList<String> cart = (ArrayList<String>)session.getAttribute("shopping_cart");
             String innerHtml = "";
-            if (cart.size() < 1) {
+            if (cart == null || cart.size() < 1) {
                 innerHtml += "<h2>No items are in your cart</h2>";
             }
             else {
@@ -82,7 +82,7 @@ public class CheckoutServlet extends HttpServlet {
             
             Locale locale = new Locale("en", "US");
             NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
-            innerHtml += "<b>TOTAL PRICE: </b>" + formatter.format(totalPrice) + "<br/>";
+            innerHtml += "<br/><b>TOTAL PRICE: </b>" + formatter.format(totalPrice) + "<br/>";
             
             innerHtml += "<br/>";
             out.write(innerHtml);

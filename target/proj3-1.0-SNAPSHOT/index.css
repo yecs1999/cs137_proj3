@@ -32,7 +32,7 @@ div.sidebar{
     border: solid black 2px;
     margin-right: 120px;
     width: 350px;
-    height: 700px;
+    height: 800px;
     float: right;
     font-family: "Palatino Linotype";
 }
@@ -139,4 +139,12 @@ div.checkout form{
     display: inline-block;
     text-align: left;
     font-family: inherit;
+}
+
+.buttonClass
+{
+    background-color: lightskyblue;
+    margin: auto;
+    display: block;
+    font-size: x-large;
 }
