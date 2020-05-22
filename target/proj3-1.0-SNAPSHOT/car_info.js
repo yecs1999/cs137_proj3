@@ -27,7 +27,6 @@ function init()
 
 function getCarServletInfo(){
     var pid = getPID();
-    console.log(pid);
     if (window.XMLHttpRequest)
     {  // IE7+, Firefox, Chrome, Opera, Safari
         var xhr = new XMLHttpRequest();
@@ -50,10 +49,39 @@ function getCarServletInfo(){
     xhr.open ("POST", "ProductDetailsServlet", true);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
     xhr.send ('pid=' + pid);  
-    
 }
 
+function saveCar(){
+    var pid = getPID();
+    show_saved(pid);
+    if (window.XMLHttpRequest)
+    {  // IE7+, Firefox, Chrome, Opera, Safari
+        var xhr = new XMLHttpRequest();
+    }
+    else
+    {  // IE5, IE6
+        var xhr = new ActiveXObject ("Microsoft.XMLHTTP");
+    }
+    xhr.onreadystatechange = function ()
+    { // 4 means finished, and 200 means okay.
+        if (xhr.readyState == 4 && xhr.status == 200)
+        {
+            //var result = xhr.responseText;
+            //document.getElementById("car_info").innerHTML = result;
+            //tax = parseFloat(result);
+            //document.getElementById("totalCost").innerText = priceFormat.format(price + price * tax);
+        }
+    }
+    // Call the response software component
+    xhr.open ("POST", "ProductDetailsServlet", true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    xhr.send ('to_save= true');  
+}
 
+function show_saved(pid){
+    var cart_id = document.getElementById("cart_id");
+    cart_id.innerHTML += "<h2>Car with id: (" + pid + ") is now in cart. </h2";
+}
 
 //Extracts the pid from the url
 const getPID = ()=> 
