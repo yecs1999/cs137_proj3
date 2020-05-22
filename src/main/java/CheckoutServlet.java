@@ -50,7 +50,7 @@ public class CheckoutServlet extends HttpServlet {
             //Depending on if the parameters are posted to this servlet or not. Temp using history below
             //ArrayList<String> cart = (ArrayList<String>)session.getAttribute("cart");
             //ArrayList<String> cart = request.getParameterValues("pid");
-            ArrayList<String> cart = (ArrayList<String>)session.getAttribute("recent_cars");
+            ArrayList<String> cart = (ArrayList<String>)session.getAttribute("shopping_cart");
             String innerHtml = "";
             if (cart.size() < 1) {
                 innerHtml += "<h2>No items are in your cart</h2>";
@@ -73,7 +73,7 @@ public class CheckoutServlet extends HttpServlet {
                     Integer year = rs.getInt("year");
                     String price = rs.getString("price");
                     totalPrice += Double.parseDouble(price);
-                    innerHtml += "<b>PID " + act_pid.toString() + ": </b> <a href=car_info.php?pid=" + act_pid.toString()
+                    innerHtml += "<b>PID " + act_pid.toString() + ": </b> <a href=car_info.html?pid=" + act_pid.toString()
                             + " onclick='addCarToHistory(" + act_pid.toString() + ");'>" + make + " " + model + " " + year.toString() + "</a><br/>";
                 }
                 stmt.close();
