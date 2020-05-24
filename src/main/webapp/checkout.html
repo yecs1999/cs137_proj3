@@ -27,7 +27,7 @@
             <br/>
             <div style="text-align: center;" id="cart"><h2>Cart Goes Here</h2></div>
             <div style="text-align: center;">
-            <form id="checkoutForm" action="send.php" method="POST">
+            <form id="checkoutForm" action="CheckoutSubmissionServlet" method="POST">
                 <input type="hidden" id="carname" name="model">
                 <strong>Name:</strong> First:
                 <input type="text" name="firstname" value="" size=15>
@@ -71,7 +71,7 @@
                 <input type="text" name="cvv" id="cvv" value="" size=2 onkeypress="return isDigit(event, 'Payment Info')">
                 <br/><br/>
                 <!--<strong>TOTAL COST:</strong> <bdi id="totalCost">NULL</bdi>-->
-                <button class="buttonClass" onclick="document.getElementById('carname').value = productToString()">PURCHASE</button>
+                <button type="submit" class="buttonClass" onclick="return validateCheckout()">PURCHASE</button>
             </form>
             </div>
         </div>

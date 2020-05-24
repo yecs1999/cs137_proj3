@@ -155,6 +155,23 @@ function getFinalPrice() {
     }
 }
 
+function validateCheckout() {
+    var checkoutForm = document.getElementById("checkoutForm");
+    var firstname = checkoutForm.firstname.value;
+    var lastname = checkoutForm.lastname.value;
+    var code = checkoutForm.code.value;
+    var phone = checkoutForm.phone.value;
+    var email = checkoutForm.email.value;
+    fillAddress();
+    method = checkoutForm.method.value;
+    var card = checkoutForm.card.value;
+    var cvv = checkoutForm.cvv.value;
+
+    let allFields = [firstname, lastname, code, phone, email, address[0].value, address[1].value, address[2].value, address[3].value, address[4].value, card, cvv];
+    let allFieldsName = ["First Name", "Last Name", "International Code", "Phone Number", "Email-Address", "Country", "Street Address", "City", "State/Provence", "Postal Code", "Card Number", "CVV"];
+    return !fieldsEmpty(allFields, allFieldsName) && creditCheck(card, cvv) && emailCheck(email);
+}
+
 function submitCheckout() {
     var checkoutForm = document.getElementById("checkoutForm");
     var firstname = checkoutForm.firstname.value;
